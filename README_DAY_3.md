@@ -375,6 +375,48 @@ Base Stats:
 
 ---
 
+# Final Day 3 Code
+
+By the end of today, your code should look similar to this:
+
+```python
+import requests
+
+pokemon_name = input("Enter a Pokémon name: ").lower()
+
+url = f"https://pokeapi.co/api/v2/pokemon/{pokemon_name}"
+
+response = requests.get(url)
+
+if response.status_code == 200:
+    data = response.json()
+
+    print("\n--- Pokémon Info ---")
+    print("Name:", data["name"].title())
+    print("ID:", data["id"])
+    print("Height:", data["height"])
+    print("Weight:", data["weight"])
+
+    print("\nTypes:")
+    for type_info in data["types"]:
+        print("-", type_info["type"]["name"])
+
+    print("\nAbilities:")
+    for ability_info in data["abilities"]:
+        print("-", ability_info["ability"]["name"])
+
+    print("\nBase Stats:")
+    for stat_info in data["stats"]:
+        stat_name = stat_info["stat"]["name"]
+        stat_value = stat_info["base_stat"]
+        print(f"- {stat_name}: {stat_value}")
+
+else:
+    print("Pokémon not found.")
+```
+
+---
+
 # What You Learned Today
 
 Today you learned that API data can be nested.
